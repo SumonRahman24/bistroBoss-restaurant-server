@@ -203,6 +203,8 @@ async function run() {
     app.post("/create-payment-intent", async (req, res) => {
       const { price } = req.body;
 
+      console.log("price", price);
+
       if (price > 0) {
         const amount = parseInt(price * 100);
         const paymentIntent = await stripe.paymentIntents.create({
@@ -215,8 +217,6 @@ async function run() {
           clientSecret: paymentIntent.client_secret,
         });
       }
-
-      console.log(price);
     });
 
     // await client.db("admin").command({ ping: 1 });
